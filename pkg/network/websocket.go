@@ -38,7 +38,7 @@ func (r *Router) HandleConnection(w http.ResponseWriter, req *http.Request, clie
 func (r *Router) Route(ctx context.Context, e event.Event[any]) error {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	
+
 	// Example: Broadcaster or targeted routing logic can be added here.
 	for _, conn := range r.connections {
 		if err := conn.WriteJSON(e); err != nil {

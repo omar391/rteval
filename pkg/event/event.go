@@ -27,7 +27,7 @@ func NewBaseEvent[T any](id string, eventType string, payload T) *BaseEvent[T] {
 	}
 }
 
-func (e *BaseEvent[T]) ID() string          { return e.id }
+func (e *BaseEvent[T]) ID() string           { return e.id }
 func (e *BaseEvent[T]) Timestamp() time.Time { return e.timestamp }
-func (e *BaseEvent[T]) Type() string        { return e.eventType }
-func (e *BaseEvent[T]) Payload() T          { return e.payload }
+func (e *BaseEvent[T]) Type() string         { return e.eventType }
+func (e *BaseEvent[T]) Payload() T           { return e.payload }
