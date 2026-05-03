@@ -26,3 +26,21 @@ rteval is a high-performance, low-latency Go library designed for **sub-second e
 - **Lock-Free Concurrency**: SCMP ring buffer using atomic CAS.
 - **Generic Event Pipeline**: Type-safe event handling.
 - **Resilient Event Loop**: Built-in panic recovery and graceful shutdown.
+
+## 🏗 Advanced Example: Rule-Based Routing
+
+```go
+eval := routing.NewEvaluator()
+
+// Add a high-priority rule for payment events
+eval.AddRule("payment.", func(ctx context.Context, e event.Event[any]) error {
+    fmt.Printf("Alert: Payment activity detected - %v\n", e.Payload())
+    return nil
+})
+
+processor := func(ctx context.Context, e event.Event[any]) error {
+    return eval.Process(ctx, e)
+}
+
+el := engine.NewEventLoop[event.Event[any]](2048, processor)
+```
